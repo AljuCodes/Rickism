@@ -77,20 +77,42 @@ extension RMCharacterDetailViewController: UICollectionViewDelegate, UICollectio
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("working number of itemsInSection")
-         return 5
+        let sectionType = viewModel.sections[section]
+        switch sectionType{
+        case .photo:
+            return 1
+        case .information(let viewModels):
+            return viewModels.count
+        case .episodes(let viewModels):
+            return viewModels.count
+            
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath )
-        if(indexPath.section == 0){
-            cell.backgroundColor = .systemPink
-        } else if (indexPath.section == 1){
-            cell.backgroundColor = .systemGreen
-        } else {
-            cell.backgroundColor = .systemBlue
+        let sectionType = viewModel.sections[indexPath.section]
+        
+        switch sectionType {
+        case .photo(let viewModel):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterPhotoCollectionViewCell.cellIdentifier, for: indexPath) as? RMCharacterPhotoCollectionViewCell else {
+                fatalError("fatal error ")
+            }
+            cell.backgroundColor = .yellow
+            return cell
+                    case .information( let viewModels):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterInfoCollectionViewCell.cellIdentifier, for: indexPath) as? RMCharacterInfoCollectionViewCell else {
+                fatalError("fatal error ")
+            }
+            cell.backgroundColor = .systemRed
+            return cell
+                    case .episodes(let viewModels):
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterEpisodeCollectionViewCell.cellIdentifier, for: indexPath) as? RMCharacterEpisodeCollectionViewCell else {
+                fatalError("fatal error ")
+            }
+            cell.backgroundColor = .systemOrange
+            return cell
         }
-        print("working \(indexPath.row)")
-        return cell
+        
     }
 }
 
