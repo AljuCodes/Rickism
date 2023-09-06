@@ -155,7 +155,7 @@
 				CE4824C52A9C7F51002B7669 /* Resources */,
 				CE4824C42A9C7F46002B7669 /* APIClient */,
 				CE4824C32A9C7F27002B7669 /* Controllers */,
-				CE4824C22A9C7EEE002B7669 /* ModelView */,
+				CE4824C22A9C7EEE002B7669 /* VIewModel */,
 				CE4824C12A9C7EE4002B7669 /* View */,
 				CE4824C02A9C7ED9002B7669 /* Models */,
 				CE48249E2A9C7CBC002B7669 /* Info.plist */,
@@ -200,14 +200,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		CE4824C22A9C7EEE002B7669 /* ModelView */ = {
+		CE4824C22A9C7EEE002B7669 /* VIewModel */ = {
 			isa = PBXGroup;
 			children = (
 				CEF0CC512AA06699005E7E51 /* CharacterListViewVM.swift */,
 				CEF0CC592AA1AA59005E7E51 /* RMCharacterCollectionViewCellVM.swift */,
 				CEF0CC602AA1ECD2005E7E51 /* RMCharacterDetailVM.swift */,
 			);
-			path = ModelView;
+			path = VIewModel;
 			sourceTree = "<group>";
 		};
 		CE4824C32A9C7F27002B7669 /* Controllers */ = {

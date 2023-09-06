@@ -9,6 +9,15 @@ import UIKit
 
 final class RMCharacterDetailVM{
 
+    
+    enum SectionType: CaseIterable {
+        case photo
+        case information
+        case episodes
+    }
+    
+    public let  sections = SectionType.allCases
+    
     private let character: RMCharacter
     
     init(character: RMCharacter) {
