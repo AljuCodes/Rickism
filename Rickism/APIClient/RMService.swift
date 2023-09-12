@@ -20,6 +20,10 @@ final class RMService {
         case failedToCreateRequest
         case failedToGetData
     }
+    
+    private let cacheManager = RMAPICacheManager()
+    
+    
     /// Send Rick and Morty API Call
     /// - Parameters:
     ///   - request: Request instance
@@ -32,16 +36,32 @@ final class RMService {
             return
         }
         
-        let task  = URLSession.shared.dataTask(with: urlRequest) { data, _, error in
-            guard let data = data, error == nil else {
+        // cached data stuff
+        if let cachedData = cacheManager.getCachedResponse(for: request.endPoint!, url: urlRequest.url!){
+            do {
+                let result = try JSONDecoder().decode(type.self, from: cachedData)
+                completion(.success(result))
+                //
+            } catch {
+                completion(.failure(error))
+            }
+            return
+        }
+        
+        let task  = URLSession.shared.dataTask(with: urlRequest) {[weak self] data, _, error in
+            
+            guard let data, error == nil else {
                 completion(.failure(error ?? RMServiceError.failedToGetData))
             return
             }
             do {
                 let result = try JSONDecoder().decode(type.self, from: data)
+                self?.cacheManager.setCache(for: request.endPoint!, url: request.url!, data: data)
                 completion(.success(result))
                 //
             } catch {
+                
+                print("Decoder error has been thrown for type: \(type.self), for \(String(describing: urlRequest.url?.absoluteString)), data \(data.description)")
                 completion(.failure(error))
             }
             

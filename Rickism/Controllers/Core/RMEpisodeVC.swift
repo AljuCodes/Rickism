@@ -7,25 +7,36 @@
 
 import UIKit
 
-class RMEpisodeViewController: UIViewController {
-
+class RMEpisodeViewController: UIViewController, RMEpisodeListViewDelegate {
+    func rmEpisodeListView(_ episodeListView: EpisodeListView, didSelectEpisode episode: RMEpisode) {
+        let detailVC = RMEpisodesDetailVC(url: URL(string: episode.url))
+        detailVC.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    private func addSearchButton(){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didTapSearch))
+    }
+    
+    @objc
+    private func didTapSearch() {
+        
+    }
+    private let episodeListView = EpisodeListView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        episodeListView.delegate = self
         view.backgroundColor = .systemBackground
         title = "Episodes"
         self.navigationItem.largeTitleDisplayMode = .automatic
-        // Do any additional setup after loading the view.
+        view.addSubview(episodeListView)
+        addSearchButton()
+        NSLayoutConstraint.activate([
+            episodeListView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            episodeListView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            episodeListView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            episodeListView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

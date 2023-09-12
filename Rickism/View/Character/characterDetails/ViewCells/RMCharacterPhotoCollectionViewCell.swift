@@ -9,14 +9,6 @@ import UIKit
 
 class RMCharacterPhotoCollectionViewCell: UICollectionViewCell {
      static let cellIdentifier = "RMCharacterPhotoCollectionView"
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
 
     private let imageView: UIImageView = {
         let imageView = UIImageView()

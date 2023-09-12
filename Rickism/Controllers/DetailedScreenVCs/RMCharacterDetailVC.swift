@@ -71,7 +71,7 @@ final class RMCharacterDetailViewController: UIViewController {
 
 extension RMCharacterDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-        
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return viewModel.sections.count
     }
@@ -99,13 +99,13 @@ extension RMCharacterDetailViewController: UICollectionViewDelegate, UICollectio
             }
             cell.configure(with: viewModel)
             return cell
-                    case .information( let viewModels):
+        case .information( let viewModels):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterInfoCollectionViewCell.cellIdentifier, for: indexPath) as? RMCharacterInfoCollectionViewCell else {
                 fatalError("fatal error ")
             }
             cell.configure(with: viewModels[indexPath.row])
             return cell
-                    case .episodes(let viewModels):
+        case .episodes(let viewModels):
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RMCharacterEpisodeCollectionViewCell.cellIdentifier, for: indexPath) as? RMCharacterEpisodeCollectionViewCell else {
                 fatalError("fatal error ")
             }
@@ -113,6 +113,23 @@ extension RMCharacterDetailViewController: UICollectionViewDelegate, UICollectio
             return cell
         }
         
+        
+        
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectionType = viewModel.sections[indexPath.section]
+        
+        switch selectionType {
+        case .photo, .information:
+            break
+        case .episodes:
+            let episodes = self.viewModel.episodes
+            let selection = episodes[indexPath.row]
+             let vc = RMEpisodesDetailVC(url: URL(string: selection))
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
 }
 

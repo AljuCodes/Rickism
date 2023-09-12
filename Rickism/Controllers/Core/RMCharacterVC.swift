@@ -16,6 +16,17 @@ class RMCharactersViewController: UIViewController, RMCharacterListViewDelegate 
         
     }
     
+    private func addSearchButton(){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didTapSearch))
+    }
+    
+    @objc
+    private func didTapSearch() {
+        let vc = RMSearchVC(config: RMSearchVC.Config(type: .character))
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 
     private let characterListView = CharacterListView()
     
@@ -26,6 +37,7 @@ class RMCharactersViewController: UIViewController, RMCharacterListViewDelegate 
         title = "Characters"
         self.navigationItem.largeTitleDisplayMode = .automatic
         view.addSubview(characterListView)
+        addSearchButton()
         NSLayoutConstraint.activate([
             characterListView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             characterListView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
@@ -33,17 +45,4 @@ class RMCharactersViewController: UIViewController, RMCharacterListViewDelegate 
             characterListView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

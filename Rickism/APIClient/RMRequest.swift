@@ -11,7 +11,7 @@ import Foundation
 final class RMRequest {
     
     
-    private let endPoint: RMEndpoint?
+    var endPoint: RMEndpoint?
     private struct Constants {
         static let baseUrl = "https://rickandmortyapi.com/api"
     }
@@ -46,7 +46,11 @@ final class RMRequest {
     init?(url: URL, endPoint: RMEndpoint? =  nil){
 //        print("this is working ")
         self.tempUrlString = url.absoluteString
-        self.endPoint = endPoint
+        for rmEndPointCase in  RMEndpoint.allCases {
+            if  url.absoluteString.contains(rmEndPointCase.rawValue) {
+                self.endPoint = rmEndPointCase
+            }
+        }
         self.patchComponents = []
         self.queryParameters = []
 //        print(url.absoluteString)
@@ -106,4 +110,5 @@ final class RMRequest {
 
 extension RMRequest {
     static let listCharactersRequests = RMRequest(endPoint: .character)
+    static let listEpisodeRequests = RMRequest(endPoint: .episode)
 }

@@ -9,13 +9,6 @@ import UIKit
 
 class RMCharacterInfoCollectionViewCell: UICollectionViewCell {
     static let cellIdentifier = "RMCharacterInfoCollectionView"
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
 
     private let titleLable: UILabel = {
         let label = UILabel()
@@ -86,11 +79,11 @@ class RMCharacterInfoCollectionViewCell: UICollectionViewCell {
 
             valueLable.leftAnchor.constraint(equalTo: iconImageView.rightAnchor, constant: 10),
             valueLable.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10),
-            valueLable.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 36),
-            valueLable.heightAnchor.constraint(equalToConstant: 30)
+            valueLable.topAnchor.constraint(equalTo: contentView.topAnchor),
+            valueLable.bottomAnchor.constraint(equalTo: titleContainerView.topAnchor)
         ])
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         valueLable.text = nil

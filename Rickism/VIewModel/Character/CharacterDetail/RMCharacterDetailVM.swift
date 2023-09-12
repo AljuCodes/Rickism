@@ -7,18 +7,22 @@
 
 import UIKit
 
-final class RMCharacterDetailVM{
+final class RMCharacterDetailVM {
 
     
     enum SectionType {
         case photo(viewModel: RMCharacterPhotoCollectionViewCellVM)
         case information(viewModels: [RMCharacterInfoCollectionViewCellVM])
-        case episodes(viewModels: [RMCharacterEpisodeCollectionViewCellVM])
+        case episodes(viewModels: [RMEpisodeCollectionViewCellVM])
     }
     
     public var  sections :[SectionType] = []
     
     private let character: RMCharacter
+    
+    public var episodes: [String] {
+        character.episode
+    }
     
     init(character: RMCharacter) {
         self.character = character
@@ -40,7 +44,7 @@ final class RMCharacterDetailVM{
                         
             ]),
             .episodes(viewModels: character.episode.compactMap({
-                return RMCharacterEpisodeCollectionViewCellVM(episodeDataUrl: URL(string: $0))
+                return RMEpisodeCollectionViewCellVM(episodeDataUrl: URL(string: $0))
             })
                       )
             ]

@@ -7,6 +7,9 @@
 
 import UIKit
 
+
+var isCachedLogVisible = false
+
 class RMTabBarController: UITabBarController {
     
     let k = K()
@@ -20,7 +23,7 @@ class RMTabBarController: UITabBarController {
         let episodesVC = RMEpisodeViewController()
         let locationsVC = RMLocationsViewController()
         let charactersVC = RMCharactersViewController()
-        let settingsVC = RMSettingsViewController()
+        let settingsVC = RMSettingsVC()
         
         let episodeNav = UINavigationController(rootViewController: episodesVC)
         let locationNav = UINavigationController(rootViewController: locationsVC)
@@ -33,17 +36,17 @@ class RMTabBarController: UITabBarController {
             tag: 3
         )
         locationNav.tabBarItem = UITabBarItem(
-            title: k.episodes,
+            title: k.locations,
             image: UIImage(systemName: "globe"),
             tag: 2
         )
         characterNav.tabBarItem = UITabBarItem(
-            title: k.episodes,
+            title: k.characters,
             image: UIImage(systemName: "person"),
             tag: 1
         )
         settingsVC.tabBarItem = UITabBarItem(
-            title: k.episodes,
+            title: k.settings,
             image: UIImage(systemName: "gear"),
             tag: 4
         )

@@ -8,6 +8,19 @@
 import Foundation
 import UIKit
 
+final class CustomDateFormatter {
+    
+    public static func getDateInString(_ value: String)-> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSZ"
+        guard let date = dateFormatter.date(from: value) else {
+            fatalError()
+        }
+        return date.formatted(
+            date: Date.FormatStyle.DateStyle.abbreviated, time: Date.FormatStyle.TimeStyle.omitted
+        )
+    }
+}
 
 final class RMCharacterInfoCollectionViewCellVM {
     private let type: infoType
@@ -22,22 +35,16 @@ final class RMCharacterInfoCollectionViewCellVM {
     public var title: String {
         type.displayTitle
     }
+
     
     public var displayValue: String {
         if value.isEmpty { return "None"}
         
         
         if self.type == .created {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSZ"
-            guard let date = dateFormatter.date(from: value) else {
-                fatalError()
-            }
-            return date.formatted(
-                date: Date.FormatStyle.DateStyle.abbreviated, time: Date.FormatStyle.TimeStyle.omitted
-            )
+            return CustomDateFormatter.getDateInString(value)
         }
-        return value
+            return value
     }
     
     public var iconImage: UIImage? {

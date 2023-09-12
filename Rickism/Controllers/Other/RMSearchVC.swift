@@ -1,31 +1,42 @@
 //
-//  RMLocationViewController.swift
+//  RMSearchVC.swift
 //  Rickism
 //
-//  Created by FAO on 28/08/23.
+//  Created by FAO on 11/09/23.
 //
 
 import UIKit
 
-class RMLocationsViewController: UIViewController {
+class RMSearchVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+         title = "Search"
         view.backgroundColor = .systemBackground
-        title = "Locations"
-        self.navigationItem.largeTitleDisplayMode = .automatic
-        addSearchButton()
         // Do any additional setup after loading the view.
     }
     
-    private func addSearchButton(){
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didTapSearch))
+    struct Config {
+        enum configType {
+            case character
+            case episode
+            case location
+        }
+        let type : configType
     }
     
-    @objc
-    private func didTapSearch() {
+    private let config: Config
+    
+    init(config: Config) {
+        self.config = config
+        super.init(nibName: nil, bundle: nil)
         
     }
+    required init?(coder: NSCoder) {
+        fatalError("Unsupported")
+    }
+    
+    
     /*
     // MARK: - Navigation
 
