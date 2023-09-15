@@ -9,7 +9,7 @@ import UIKit
 
 class RMLocationsViewController: UIViewController, RMLocationViewVMDelegate, RMLocationViewDelegate {
     func rmLocationViewDelegate(RMLocationVM: RMLocation) {
-       let vc = RMLocationDetailVC()
+        let vc = RMLocationDetailVC(vm: RMLocationVM)
         vc.title = RMLocationVM.name
         vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)

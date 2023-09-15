@@ -74,17 +74,21 @@ class RMLocationView: UIView {
 
 
 extension RMLocationView: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return vm?.cellViewModels.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
        guard let cell = tableView.dequeueReusableCell(withIdentifier: RMLocationTVC.cellIdentifier, for: indexPath) as? RMLocationTVC else {
             fatalError()
         }
+        
         guard let cellVMs = vm?.cellViewModels else {
             fatalError()
         }
+        
         let cellVM = cellVMs[indexPath.row]
         cell.configure(with: cellVM)
         return cell
@@ -96,9 +100,7 @@ extension RMLocationView: UITableViewDataSource, UITableViewDelegate {
         guard let locationModel = vm?.location(at: indexPath.row) else {
             return
         }
-        
         delegate?.rmLocationViewDelegate(RMLocationVM: locationModel)
-        
     }
     
 }

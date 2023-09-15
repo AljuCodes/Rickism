@@ -22,6 +22,7 @@ class RMEpisodeViewController: UIViewController, RMEpisodeListViewDelegate {
     private func didTapSearch() {
         
     }
+    
     private let episodeListView = EpisodeListView()
     
     override func viewDidLoad() {
