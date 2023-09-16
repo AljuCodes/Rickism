@@ -35,6 +35,7 @@ class RMLocationsViewController: UIViewController, RMLocationViewVMDelegate, RML
         rmLocationViewVM.fetchLocations()
         rmLocationViewVM.delegate = self
         primaryView.delegate = self
+        addSearchButton()
         // Do any additional setup after loading the view.
     }
     
@@ -44,7 +45,9 @@ class RMLocationsViewController: UIViewController, RMLocationViewVMDelegate, RML
     
     @objc
     private func didTapSearch() {
-        
+        let vc = RMSearchVC(config: RMSearchVC.Config(type: .location))
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 

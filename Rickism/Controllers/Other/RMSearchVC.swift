@@ -11,7 +11,7 @@ class RMSearchVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-         title = "Search"
+        title = self.config.type.title
         view.backgroundColor = .systemBackground
         // Do any additional setup after loading the view.
     }
@@ -21,8 +21,13 @@ class RMSearchVC: UIViewController {
             case character
             case episode
             case location
+            
+            var title: String {
+                return "Search \(String(describing: self).capitalized)"
+            }
         }
         let type : configType
+        
     }
     
     private let config: Config
