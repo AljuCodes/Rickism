@@ -5,9 +5,10 @@
 //  Created by FAO on 16/09/23.
 //
 
-import Foundation
+import UIKit
 
 
 struct RMNoSearchResultsViewVM {
-    
+    let title = "No Results"
+    let image = UIImage(systemName: "magnifyingglass.circle")
 }
